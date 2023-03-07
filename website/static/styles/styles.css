@@ -1,0 +1,97 @@
+/* Font Imports */
+
+/* CSS Variables */
+
+:root {
+
+}
+
+/* Generic Styles */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    user-select: none;
+}
+
+html {
+    font-size: 0.625rem;
+}
+
+body {
+    background-color: #ED1B24;
+}
+
+h1, h2, h3 {
+
+}
+
+a {
+    color: #000;
+    text-decoration: none;
+}
+
+ul {
+    list-style-type: none;
+}
+
+/* Bootstrap Overwrites */
+
+.btn {
+    font-size: 1.6rem;
+}
+
+/* Register Page */
+
+#register-page {
+    font-size: 1.6rem;
+}
+
+.register-container {
+    background-color: #FFF;
+    border: none;
+    border-radius: 1em;
+    margin: 7.5% auto 0 auto;
+    width: 75%;
+}
+
+.register-container-body {
+    padding: 0;
+}
+
+.register-header {
+    background-color: #3A3A3A;
+    border-radius: 1em 1em 0 0 !important;
+    color: #FFF;
+    padding: 1em 0;
+    text-align: center;
+}
+
+.register-form-container {
+    padding: 2.5% 7.5%;
+}
+
+.form-item {
+    margin-top: 1em;
+}
+
+.form-label {
+    font-weight: bold;
+}
+
+.form-control {
+    font-size: 1.6rem;
+}
+
+/* Login Page */
+
+#forgot_password {
+    text-align: right;
+}
+
+#forgot_password a:hover {
+    text-decoration: underline;
+}
+
+/* Generic Styles */
