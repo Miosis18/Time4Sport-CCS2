@@ -1,6 +1,7 @@
 # Fully Complete
 
 from flask import Blueprint, render_template, redirect, url_for, flash
+from flask_login import current_user
 from sqlalchemy import select
 from website.management.database_management import database
 from website.models.database_models import Employee, EmployeeAddress
@@ -15,6 +16,9 @@ registration = Blueprint("registration", __name__, static_folder="./website/stat
 # Need to add Email verification
 @registration.route("/register", methods=["GET", "POST"])
 def registration_page():
+
+    if current_user.is_authenticated:
+        return redirect(url_for("time4sport.home"))
 
     registration_form = RegisterForm()
 

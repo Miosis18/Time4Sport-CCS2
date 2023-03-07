@@ -1,5 +1,5 @@
-from flask import Blueprint
-from flask_login import login_required
+from flask import Blueprint, render_template
+from flask_login import login_required, current_user
 
 time4sport = Blueprint("time4sport", __name__, static_folder="static", template_folder="templates")
 
@@ -12,7 +12,7 @@ def index():
 @time4sport.route("/home", methods=["GET", "POST"])
 @login_required
 def home():
-    return "Wowza the home page"
+    return render_template("home.html", name=current_user.first_name)
 
 
 @time4sport.route("/availability", methods=["GET", "POST"])

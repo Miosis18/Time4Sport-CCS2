@@ -16,7 +16,6 @@
 }
 
 html {
-    font-size: 0.625rem;
 }
 
 body {
@@ -38,15 +37,7 @@ ul {
 
 /* Bootstrap Overwrites */
 
-.btn {
-    font-size: 1.6rem;
-}
-
 /* Register Page */
-
-#register-page {
-    font-size: 1.6rem;
-}
 
 .register-container {
     background-color: #FFF;
@@ -80,10 +71,6 @@ ul {
     font-weight: bold;
 }
 
-.form-control {
-    font-size: 1.6rem;
-}
-
 /* Login Page */
 
 #forgot_password {
@@ -94,4 +81,12 @@ ul {
     text-decoration: underline;
 }
 
+/* Home Page */
+
+
+
 /* Generic Styles */
+
+.white-text {
+    color: #FFF;
+}
