@@ -26,6 +26,7 @@ def login_page():
         employee_object = [employee[0] for employee in find_employee_by_email]
         find_email = True if (employee_object != []) else False
 
+        # Need to add a verified email field
         if ((find_email is True) and (
                 HashManagement.verify_password(employee_object[0].password, login_form.password.data))):
             # No need for a flash message as they will never see it, they will be redirected to the home page.

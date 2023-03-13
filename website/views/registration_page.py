@@ -73,7 +73,8 @@ def registration_page():
             database.session.add(new_employee_address)
             database.session.commit()
 
-            flash("Account created, please check your emails to verify account.", category="success")
+            flash(f"Account created, please check your emails to verify account. <a href={url_for('login')}>Login</a>",
+                  category="success")
             return redirect(url_for("registration.registration_page"))
 
     else:
@@ -84,15 +85,3 @@ def registration_page():
         except KeyError:
             pass
         return render_template("register.html", form=registration_form)
-
-
-@registration.route("/testdata", methods=["GET"])
-def test_data():
-    find_employee = database.session.execute(select(Employee).where(Employee.email_address == "example@outlook.com"))
-
-    find_email = True if ([employee[0] for employee in find_employee] != []) else False
-
-    print([employee[0] for employee in find_employee])
-    print(find_email)
-
-    return "test"
