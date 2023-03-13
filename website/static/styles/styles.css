@@ -84,8 +84,20 @@ ul {
 /* Home Page */
 
 
+/* Footer */
+
+.footer-styles {
+    background-color: rgb(43, 48, 53);
+    color: #FFF;
+    padding: 1rem 0;
+    text-align: center;
+}
 
 /* Generic Styles */
+
+.page-content {
+    margin: 1rem 0;
+}
 
 .white-text {
     color: #FFF;

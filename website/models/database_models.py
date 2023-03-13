@@ -20,7 +20,7 @@ class Employee(database.Model, UserMixin):
 
 class EmployeeAddress(database.Model):
     address_id = database.Column(database.Integer, primary_key=True)
-    employee_id = database.Column(database.Integer, database.ForeignKey("employee.employee_id"), nullable=False)
+    employee_id = database.Column(database.Integer, database.ForeignKey("employees.employee_id"), nullable=False)
     address_line_one = database.Column(database.String(80), nullable=False)
     address_line_two = database.Column(database.String(80))
     address_city = database.Column(database.String(80), nullable=False)
@@ -31,8 +31,8 @@ class EmployeeAvailability(database.Model):
     __table_args__ = (database.UniqueConstraint('employee_id', 'week_beginning', name='one_availability_per_employee'),)
 
     availability_id = database.Column(database.Integer, primary_key=True)
-    employee_id = database.Column(database.Integer, database.ForeignKey("employee.employee_id"), nullable=False)
-    week_beginning = database.Column(database.Boolean, nullable=False, default=False)
+    employee_id = database.Column(database.Integer, database.ForeignKey("employees.employee_id"), nullable=False)
+    week_beginning = database.Column(database.Date, nullable=False, default=False)
     monday = database.Column(database.Boolean, nullable=False, default=False)
     tuesday = database.Column(database.Boolean, nullable=False, default=False)
     wednesday = database.Column(database.Boolean, nullable=False, default=False)
@@ -50,7 +50,7 @@ class School(database.Model):
 
 class SchoolAddress(database.Model):
     address_id = database.Column(database.Integer, primary_key=True)
-    school_id = database.Column(database.Integer, database.ForeignKey("school.school_id"), nullable=False)
+    school_id = database.Column(database.Integer, database.ForeignKey("schools.school_id"), nullable=False)
     address_line_one = database.Column(database.String(80), nullable=False)
     address_line_two = database.Column(database.String(80))
     address_line_three = database.Column(database.String(80))
@@ -61,7 +61,7 @@ class SchoolAddress(database.Model):
 # Camps require three employees per day
 class Camp(database.Model):
     camp_id = database.Column(database.Integer, primary_key=True)
-    school_id = database.Column(database.Integer, database.ForeignKey("school.school_id"), nullable=False)
+    school_id = database.Column(database.Integer, database.ForeignKey("schools.school_id"), nullable=False)
     camp_start_time = database.Column(database.DateTime)
     camp_finishing_time = database.Column(database.DateTime)
 
@@ -72,8 +72,8 @@ class CampAvailabilityRequirements(database.Model):
     __table_args__ = (database.UniqueConstraint('camp_id', 'week_beginning', name='one_availability_per_camp'),)
 
     availability_id = database.Column(database.Integer, primary_key=True)
-    camp_id = database.Column(database.Integer, database.ForeignKey("camp.camp_id"), nullable=False)
-    week_beginning = database.Column(database.Boolean, nullable=False, default=False)
+    camp_id = database.Column(database.Integer, database.ForeignKey("camps.camp_id"), nullable=False)
+    week_beginning = database.Column(database.Date, nullable=False, default=False)
     monday = database.Column(database.Boolean, nullable=False, default=False)
     tuesday = database.Column(database.Boolean, nullable=False, default=False)
     wednesday = database.Column(database.Boolean, nullable=False, default=False)
@@ -85,7 +85,20 @@ class CampAvailabilityRequirements(database.Model):
 
 # One schedule per employee per day (Camps will require three schedule entries each)
 class Schedule(database.Model):
+    __table_args__ = (database.UniqueConstraint('employee_id', 'camp_id', 'week_beginning', 'scheduled_day'),)
+
     schedule_id = database.Column(database.Integer, primary_key=True)
-    employee_id = database.Column(database.Integer, database.ForeignKey("employee.employee_id"), nullable=False)
-    camp_id = database.Column(database.Integer, database.ForeignKey("camp.camp_id"), nullable=False)
-    scheduled_day = database.Column(database.DateTime)
+    employee_id = database.Column(database.Integer, database.ForeignKey("employees.employee_id"), nullable=False)
+    camp_id = database.Column(database.Integer, database.ForeignKey("camps.camp_id"), nullable=False)
+    week_beginning = database.Column(database.Date, nullable=False)
+    scheduled_day = database.Column(database.String(9), nullable=False)
+
+
+class ShortDays(database.Model):
+    __table_args__ = (database.UniqueConstraint('camp_id', 'week_beginning', 'day'),)
+
+    id = database.Column(database.Integer, primary_key=True)
+    camp_id = database.Column(database.Integer, nullable=False)
+    week_beginning = database.Column(database.Date, nullable=False)
+    day = database.Column(database.String(9), nullable=False)
+    employees_booked = database.Column(database.Integer, nullable=False)
