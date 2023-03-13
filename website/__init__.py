@@ -3,6 +3,7 @@ from flask_login import LoginManager
 from website.views.registration_page import registration
 from website.views.login_page import login
 from website.views.time4sport import time4sport
+from website.management.dummy_data import fakedata
 from website.models.database_models import Employee
 from website.management.database_management import database
 
@@ -12,6 +13,7 @@ def create_app():
     app.register_blueprint(registration, url_prefix="")
     app.register_blueprint(login, url_prefix="")
     app.register_blueprint(time4sport, url_prefix="")
+    app.register_blueprint(fakedata, url_prefix="")
 
     app.config["DEBUG"] = True
     app.config["SECRET_KEY"] = "KeepThisASecret"
