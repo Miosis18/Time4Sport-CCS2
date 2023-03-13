@@ -3,6 +3,8 @@ from website.management.database_management import database
 
 
 class Employee(database.Model, UserMixin):
+    __tablename__ = "employees"
+
     employee_id = database.Column(database.Integer, primary_key=True)
     first_name = database.Column(database.String(50), nullable=False)
     last_name = database.Column(database.String(80), nullable=False)
@@ -19,6 +21,8 @@ class Employee(database.Model, UserMixin):
 
 
 class EmployeeAddress(database.Model):
+    __tablename__ = "employee_addresses"
+
     address_id = database.Column(database.Integer, primary_key=True)
     employee_id = database.Column(database.Integer, database.ForeignKey("employees.employee_id"), nullable=False)
     address_line_one = database.Column(database.String(80), nullable=False)
@@ -28,6 +32,7 @@ class EmployeeAddress(database.Model):
 
 
 class EmployeeAvailability(database.Model):
+    __tablename__ = "employee_availability"
     __table_args__ = (database.UniqueConstraint('employee_id', 'week_beginning', name='one_availability_per_employee'),)
 
     availability_id = database.Column(database.Integer, primary_key=True)
@@ -43,12 +48,16 @@ class EmployeeAvailability(database.Model):
 
 
 class School(database.Model):
+    __tablename__ = "schools"
+
     school_id = database.Column(database.Integer, primary_key=True)
     school_name = database.Column(database.String(128), nullable=False)
     total_students = database.Column(database.Integer, nullable=False)
 
 
 class SchoolAddress(database.Model):
+    __tablename__ = "school_addresses"
+
     address_id = database.Column(database.Integer, primary_key=True)
     school_id = database.Column(database.Integer, database.ForeignKey("schools.school_id"), nullable=False)
     address_line_one = database.Column(database.String(80), nullable=False)
@@ -60,6 +69,8 @@ class SchoolAddress(database.Model):
 
 # Camps require three employees per day
 class Camp(database.Model):
+    __tablename__ = "camps"
+
     camp_id = database.Column(database.Integer, primary_key=True)
     school_id = database.Column(database.Integer, database.ForeignKey("schools.school_id"), nullable=False)
     camp_start_time = database.Column(database.DateTime)
@@ -69,6 +80,7 @@ class Camp(database.Model):
 
 
 class CampAvailabilityRequirements(database.Model):
+    __tablename__ = "camp_availability_requirements"
     __table_args__ = (database.UniqueConstraint('camp_id', 'week_beginning', name='one_availability_per_camp'),)
 
     availability_id = database.Column(database.Integer, primary_key=True)
@@ -85,6 +97,7 @@ class CampAvailabilityRequirements(database.Model):
 
 # One schedule per employee per day (Camps will require three schedule entries each)
 class Schedule(database.Model):
+    __tablename__ = "schedules"
     __table_args__ = (database.UniqueConstraint('employee_id', 'camp_id', 'week_beginning', 'scheduled_day'),)
 
     schedule_id = database.Column(database.Integer, primary_key=True)
@@ -95,6 +108,7 @@ class Schedule(database.Model):
 
 
 class ShortDays(database.Model):
+    __tablename__ = 'short_days'
     __table_args__ = (database.UniqueConstraint('camp_id', 'week_beginning', 'day'),)
 
     id = database.Column(database.Integer, primary_key=True)
