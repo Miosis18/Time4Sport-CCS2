@@ -22,8 +22,12 @@ body {
     background-color: #ED1B24;
 }
 
-h1, h2, h3 {
+h1, h2 {
 
+}
+
+h3 {
+    font-size: 1.5rem;
 }
 
 a {
@@ -33,6 +37,14 @@ a {
 
 ul {
     list-style-type: none;
+}
+
+main {
+    flex: 1;
+}
+
+footer {
+    margin-top: auto;
 }
 
 /* Bootstrap Overwrites */
@@ -83,6 +95,33 @@ ul {
 
 /* Home Page */
 
+.announcement-container {
+    background-color: #FFF;
+    border-radius: 1em 1em 1em 1em;
+    margin: 1rem 0;
+    padding: 1rem;
+}
+
+.announcement-title {
+    text-decoration: underline;
+}
+
+.announcement-date {
+    font-weight: bold;
+}
+
+.home-buttons-container {
+    margin-top: 2.5em;
+}
+
+.home-button-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100px;
+    background-color: #FFF;
+    border-radius: 1em;
+}
 
 /* Footer */
 
@@ -95,8 +134,14 @@ ul {
 
 /* Generic Styles */
 
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
 .page-content {
-    margin: 1rem 0;
+    margin: 4rem 0;
 }
 
 .white-text {

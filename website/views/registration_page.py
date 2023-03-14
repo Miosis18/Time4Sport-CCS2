@@ -1,6 +1,6 @@
 # Fully Complete
 
-from flask import Blueprint, render_template, redirect, url_for, flash
+from flask import Blueprint, render_template, redirect, url_for, flash, Markup
 from flask_login import current_user
 from sqlalchemy import select
 from website.management.database_management import database
@@ -73,7 +73,8 @@ def registration_page():
             database.session.add(new_employee_address)
             database.session.commit()
 
-            flash(f"Account created, please check your emails to verify account. <a href={url_for('login')}>Login</a>",
+            flash(Markup(f"Account created, please check your emails to verify account. "
+                         f"<a href=\"{url_for('login.login_page')}\">Login Now</a>"),
                   category="success")
             return redirect(url_for("registration.registration_page"))
 
