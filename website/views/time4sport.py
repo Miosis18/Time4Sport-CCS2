@@ -26,6 +26,11 @@ def schedule():
     pass
 
 
-@time4sport.route("/payroll", methods=["GET", "POST"])
+@time4sport.route("/payslips", methods=["GET", "POST"])
 def payroll():
+    pass
+
+
+@time4sport.route("/upload-documents", methods=["GET", "POST"])
+def upload_documents():
     pass
