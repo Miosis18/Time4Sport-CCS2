@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template, redirect, url_for
 from flask_login import login_required, current_user
+from website.management.form_management import EmployeeAvailabilityForm
 
 time4sport = Blueprint("time4sport", __name__, static_folder="static", template_folder="templates")
 
@@ -18,7 +19,11 @@ def home():
 
 @time4sport.route("/availability", methods=["GET", "POST"])
 def set_availability():
-    pass
+    form = EmployeeAvailabilityForm()
+    if form.validate_on_submit():
+        # Handle form submission
+        pass
+    return render_template('set-availability.html', form=form)
 
 
 @time4sport.route("/schedule", methods=["GET", "POST"])

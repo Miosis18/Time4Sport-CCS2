@@ -2,6 +2,9 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField
 from wtforms.validators import InputRequired, Email, Optional
 
+from datetime import date, timedelta
+from wtforms.validators import DataRequired
+
 
 class RegisterForm(FlaskForm):
     first_name = StringField("First Name*", validators=[InputRequired()])
@@ -20,6 +23,14 @@ class RegisterForm(FlaskForm):
 class LoginForm(FlaskForm):
     email_address = StringField("Email Address*", validators=[InputRequired(), Email()])
     password = PasswordField("Password*", validators=[InputRequired()])
+
+
+class ForgotPasswordForm(FlaskForm):
+    email_address = StringField("Email Address*", validators=[InputRequired(), Email()])
+
+
+class EmployeeAvailabilityForm(FlaskForm):
+    pass
 
 
 class SchoolCreationForm(FlaskForm):
