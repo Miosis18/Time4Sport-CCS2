@@ -19,7 +19,7 @@ def create_app():
 
     app.config["DEBUG"] = True
     app.config["SECRET_KEY"] = "KeepThisASecret"
-    app.config["SQLALCHEMY_DATABASE_URI"] = "mysql://root@localhost:3306/time4sport"
+    app.config["SQLALCHEMY_DATABASE_URI"] = "mysql://root@127.0.0.1:3306/time4sport"
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
     database.init_app(app)
